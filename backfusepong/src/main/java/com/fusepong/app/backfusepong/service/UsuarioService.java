@@ -1,5 +1,6 @@
 package com.fusepong.app.backfusepong.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UsuarioService {
 		return repository.insert(usuario);
 	}
 	
-	public Optional<Usuario> login(Usuario usuario) {
+	public List<Usuario> login(Usuario usuario) {
 		return repository.findUsuario(usuario.getEmail(), usuario.getContrasena());
 	}
 
