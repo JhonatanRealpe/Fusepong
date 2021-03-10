@@ -1,0 +1,20 @@
+<div class="container">
+    <h3>Historia de Usuario</h3><br>
+    <button class="btn btn-primary" type="submit">Nueva</button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">ESTADO</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let hUsuario of historiasUsuario" (click)="verTickets(hUsuario.id)">
+            <th scope="row">{{hUsuario.id}}</th>
+            <td>{{hUsuario.nombre}}</td>
+            <td>{{hUsuario.estado}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

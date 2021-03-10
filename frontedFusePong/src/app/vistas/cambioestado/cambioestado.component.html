@@ -1,0 +1,21 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <h3>Cambio de estado</h3>
+      </div>
+  
+      <!-- Login Form -->
+      <form [formGroup]="cambioForm" (ngSubmit)= "onCambioestado(cambioForm.value)">
+        <input type="text" id="comentario" class="fadeIn second"  placeholder="Comentario" formControlName = "comentario">
+        <input type="submit" class="fadeIn fourth" value="Aceptar">
+      </form>
+  
+      <div class="alert alert-danger" *ngIf="errorStatus">
+        <p>{{errorMsj}}</p>
+      </div>
+  
+    </div>
+  </div>

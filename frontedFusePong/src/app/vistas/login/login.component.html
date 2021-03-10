@@ -1,0 +1,27 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="assets/fusepong.jpg" id="icon" alt="User Icon" />
+      </div>
+  
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)= "onLogin(loginForm.value)">
+        <input type="text" id="login" class="fadeIn second"  placeholder="email" formControlName = "email">
+        <input type="password" id="password" class="fadeIn third"  placeholder="password" formControlName = "contrasena">
+        <input type="submit" class="fadeIn fourth" value="Log In">
+      </form>
+  
+      <div class="alert alert-danger" *ngIf="errorStatus">
+        <p>{{errorMsj}}</p>
+      </div>
+
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" (click)="registro()">Registrarme</a>
+      </div>
+  
+    </div>
+  </div>

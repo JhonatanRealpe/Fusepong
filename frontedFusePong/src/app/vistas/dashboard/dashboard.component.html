@@ -1,0 +1,17 @@
+<div class="container">
+    <h3>Proyectos</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NOMBRE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let proyecto of proyectos" (click)="verHistoriaUsuario(proyecto.id)">
+            <th scope="row">{{proyecto.id}}</th>
+            <td>{{proyecto.nombre}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

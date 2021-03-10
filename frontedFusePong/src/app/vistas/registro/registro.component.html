@@ -1,0 +1,28 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="assets/fusepong.jpg" id="icon" alt="User Icon" />
+      </div>
+  
+      <!-- Login Form -->
+      <form [formGroup]="registroForm" (ngSubmit)= "onRegistro(registroForm.value)">
+        <input type="text" id="nombres" class="fadeIn second"  placeholder="Nombres" formControlName = "nombres">
+        <input type="text" id="apellidos" class="fadeIn second"  placeholder="Apellidos" formControlName = "apellidos">
+        <input type="text" id="telefono" class="fadeIn second"  placeholder="Telefono" formControlName = "telefono">
+        <input type="text" id="login" class="fadeIn second"  placeholder="email" formControlName = "email">
+        <input type="password" id="password" class="fadeIn third"  placeholder="password" formControlName = "contrasena">
+        <select class="form-control" id="idEmpresa" formControlName = "idEmpresa">
+            <option *ngFor="let empresa of empresas" [value]="empresa.idEmpresa" >{{ empresa.nombre }}</option>
+        </select>
+        <input type="submit" class="fadeIn fourth" value="Registrarme">
+      </form>
+  
+      <div class="alert alert-danger" *ngIf="errorStatus">
+        <p>{{errorMsj}}</p>
+      </div>
+  
+    </div>
+  </div>
