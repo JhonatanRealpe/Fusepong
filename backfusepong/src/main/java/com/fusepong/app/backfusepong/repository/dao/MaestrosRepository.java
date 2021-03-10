@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.fusepong.app.backfusepong.model.CambioEstado;
+import com.fusepong.app.backfusepong.model.DetalleTicket;
 import com.fusepong.app.backfusepong.model.Empresa;
 import com.fusepong.app.backfusepong.model.IdNombre;
 import com.fusepong.app.backfusepong.model.Ticket;
@@ -44,6 +45,21 @@ public class MaestrosRepository implements IMaestros {
 			ticket.setIdTickect(rs.getInt("idticket"));
 			ticket.setIdEstado(rs.getInt("idestado"));
 			ticket.setNombre(rs.getString("nombre"));
+			ticket.setColor(rs.getString("color"));
+			ticket.setEstado(rs.getString("estado"));
+			return ticket;
+		}
+	}
+	
+	class DetalleTicketRowMapper implements RowMapper<DetalleTicket> {
+		@Override
+		public DetalleTicket mapRow(ResultSet rs, int rowNum) throws SQLException {
+			DetalleTicket ticket = new DetalleTicket();
+			ticket.setIdDetalleTickect(rs.getInt("iddetalle_ticket"));
+			ticket.setComentario(rs.getString("comentario"));
+			ticket.setIdTicket(rs.getInt("idticket"));
+			ticket.setIdEstado(rs.getInt("idestado"));
+			ticket.setFecha(rs.getDate("fecha"));
 			ticket.setColor(rs.getString("color"));
 			ticket.setEstado(rs.getString("estado"));
 			return ticket;
@@ -85,10 +101,12 @@ public class MaestrosRepository implements IMaestros {
 				"select t.idticket, t.nombre, e.idestado, e.nombre as estado, e.color from bdfusepong.ticket t LEFT JOIN bdfusepong.estado e ON e.idestado = t.idestado where t.idhistoria_usuario = ? ",
 				new Object[] { idHistoriaUsuario }, new TicketRowMapper());
 	}
-
-	public List<IdNombre> getDetallesTicket(int idTicket) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	@SuppressWarnings("deprecation")
+	public List<DetalleTicket> getDetallesTicket(int idTicket) {
+		return jdbcTemplate.query(
+				"select t.*, e.nombre as estado, e.color from bdfusepong.detalle_ticket t LEFT JOIN bdfusepong.estado e ON e.idestado = t.idestado where t.idticket = ? ",
+				new Object[] { idTicket }, new DetalleTicketRowMapper());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -109,7 +127,8 @@ public class MaestrosRepository implements IMaestros {
 				new Object[] { cambio.getComentario(), new Date(),cambio.getIdEstado(),cambio.getIdTickect() });
 		return jdbcTemplate.update(
 				"UPDATE bdfusepong.ticket t SET t.idestado=? WHERE t.idticket=? ",
-				new Object[] { cambio.getIdTickect(), cambio.getIdEstado() });
+				new Object[] {  cambio.getIdEstado(), cambio.getIdTickect() });
 	}
+	
 
 }

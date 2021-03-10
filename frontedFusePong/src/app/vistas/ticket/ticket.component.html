@@ -15,7 +15,8 @@
             <td>{{ticket.nombre}}</td>
             <td>
                 <select class="form-control" id="idEstado" (change)="onChange($event.target.value,ticket.idTickect)">
-                    <option *ngFor="let estado of estados" [value]="estado.id" >{{ estado.nombre }}</option>
+                    <option *ngFor="let estado of estados" [value]="estado.id" [selected]="estado.id == ticket.idEstado">{{ estado.nombre }}</option>
+                    <option selected="selected"></option>
                 </select>
             </td>
             <td >

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fusepong.app.backfusepong.model.CambioEstado;
+import com.fusepong.app.backfusepong.model.DetalleTicket;
 import com.fusepong.app.backfusepong.model.Empresa;
 import com.fusepong.app.backfusepong.model.IdNombre;
 import com.fusepong.app.backfusepong.model.Ticket;
@@ -50,7 +51,7 @@ public class MaestrosController {
 	}
 	
 	@GetMapping("/detalleticket/{id}")
-	private List<IdNombre> getDetalleTicket(@PathVariable("id") Integer idTicket) {
+	private List<DetalleTicket> getDetalleTicket(@PathVariable("id") Integer idTicket) {
 		return maestrosService.getDetalleTicket(idTicket);
 	}
 	

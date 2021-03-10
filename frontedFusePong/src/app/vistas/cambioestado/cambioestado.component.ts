@@ -28,10 +28,11 @@ export class CambioestadoComponent implements OnInit {
     if(!this.errorStatus){
       let idTickect:any = this.activerouter.snapshot.paramMap.get('idTicket');
       let idEstado:any = this.activerouter.snapshot.paramMap.get('idEstado');
+      let idHistoriaUsuario:any = this.activerouter.snapshot.paramMap.get('idHU');
       this.cambioEstado = {"idTickect":idTickect,"idEstado":idEstado, "comentario":form.comentario};
       this.api.cambioEstado(this.cambioEstado).subscribe(data=>{
         if(data>0){
-          
+          this.router.navigate(['ticket',idHistoriaUsuario]);
         }else{
           this.errorStatus = true;
           this.errorMsj ="Error, en el servidor al intertar realizar cambio de estado!!! "

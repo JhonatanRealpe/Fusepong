@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fusepong.app.backfusepong.model.CambioEstado;
+import com.fusepong.app.backfusepong.model.DetalleTicket;
 import com.fusepong.app.backfusepong.model.Empresa;
 import com.fusepong.app.backfusepong.model.IdNombre;
 import com.fusepong.app.backfusepong.model.Ticket;
@@ -33,7 +34,7 @@ public class MaestrosService {
 		return repository.getTickets(idHistoriaUsuario);
 	}
 	
-	public List<IdNombre> getDetalleTicket(int idTicket){
+	public List<DetalleTicket> getDetalleTicket(int idTicket){
 		return repository.getDetallesTicket(idTicket);
 	}
 	

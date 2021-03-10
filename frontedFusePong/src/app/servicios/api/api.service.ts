@@ -7,6 +7,7 @@ import { IdNombreI } from 'src/app/modelos/idnombre.interface';
 import { TickectI } from 'src/app/modelos/ticket.interface';
 import { EmpresaI } from 'src/app/modelos/empresa.interface';
 import { CambioEstadoI } from 'src/app/modelos/cambioestado.interface';
+import { DetalleTickectI } from 'src/app/modelos/detalleticket.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,11 @@ export class ApiService {
   getTicket(idHistoriaUsuario:number):Observable<TickectI[]>{
     let dir = this.url + "maestros/ticket/"+idHistoriaUsuario;
     return this.http.get<TickectI[]>(dir)
+  }
+
+  getDetalleTicket(idTicket:number):Observable<DetalleTickectI[]>{
+    let dir = this.url + "maestros/detalleticket/"+idTicket;
+    return this.http.get<DetalleTickectI[]>(dir)
   }
 
   getEstado(idEstado:any):Observable<IdNombreI[]>{
