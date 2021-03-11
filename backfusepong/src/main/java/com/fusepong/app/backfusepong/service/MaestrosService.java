@@ -45,4 +45,12 @@ public class MaestrosService {
 	public int cambioEstado(CambioEstado cambioEstado){
 		return repository.cambioEstado(cambioEstado);
 	}
+	
+	public int addHistoriaUsuario(IdNombre hUsuario){
+		return repository.addHistoriaUsuario(hUsuario);
+	}
+	
+	public int addTicket(IdNombre ticket){
+		return repository.addTicket(ticket);
+	}
 }

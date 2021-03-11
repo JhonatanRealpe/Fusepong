@@ -1,20 +1,49 @@
 <div class="container">
     <h3>Historia de Usuario</h3><br>
-    <button class="btn btn-primary" type="submit">Nueva</button>
+    <button type="button" class="btn btn-primary" (click)="openModal(myModal,1,1,1)" >Nueva</button>
     <table class="table">
         <thead>
         <tr>
             <th scope="col">ID</th>
             <th scope="col">NOMBRE</th>
-            <th scope="col">ESTADO</th>
+            <th scope="col">Nuevo Ticket</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let hUsuario of historiasUsuario" (click)="verTickets(hUsuario.id)">
+        <tr *ngFor="let hUsuario of historiasUsuario" >
             <th scope="row">{{hUsuario.id}}</th>
             <td>{{hUsuario.nombre}}</td>
-            <td>{{hUsuario.estado}}</td>
+            <td>
+                <button type="button" class="btn btn-primary" (click)="openModal(myModal,2,hUsuario.nombre,hUsuario.id)">+</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" (click)="verTickets(hUsuario.id)">Ver Tickets</button>
+            </td>
         </tr>
         </tbody>
     </table>
+</div>
+
+
+<div class="row">
+    <modal #myModal>
+        <modal-header>
+            <h3>{{titulo}}</h3>
+        </modal-header>
+        <modal-content>
+            <form [formGroup]="addForm" (ngSubmit)= "addModal(addForm.value)">
+                <input type="text" id="nombre" class="fadeIn second"  placeholder="Nuevo" formControlName = "nombre">
+              </form>
+              <div class="alert alert-danger" *ngIf="errorStatus">
+                <p>{{errorMsj}}</p>
+              </div>
+        </modal-content>
+        <modal-footer style="justify-content: center;">
+            <div style="align-items: center;">
+                <button style=" margin: 2rem; "class="btn btn-primary" (click)="addModal(addForm.value)">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="closeModal()">Cancelar</button>
+            </div>
+            
+        </modal-footer>
+    </modal>
 </div>

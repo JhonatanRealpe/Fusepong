@@ -63,4 +63,13 @@ export class ApiService {
     return this.http.get<IdNombreI[]>(dir)
   }
 
+  addhitoriausuario(form:IdNombreI):Observable<number>{
+    let dir = this.url + "maestros/addhitoriausuario";
+    return this.http.post<number>(dir,form)
+  }
+  addticket(form:IdNombreI):Observable<number>{
+    let dir = this.url + "maestros/addticket";
+    return this.http.post<number>(dir,form)
+  }
+
 }

@@ -1,5 +1,6 @@
 package com.fusepong.app.backfusepong.repository.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -8,6 +9,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.fusepong.app.backfusepong.model.CambioEstado;
@@ -129,6 +132,42 @@ public class MaestrosRepository implements IMaestros {
 				"UPDATE bdfusepong.ticket t SET t.idestado=? WHERE t.idticket=? ",
 				new Object[] {  cambio.getIdEstado(), cambio.getIdTickect() });
 	}
+	
+	public int addHistoriaUsuario(IdNombre hUsuario) {
+		return jdbcTemplate.update(
+				"INSERT INTO bdfusepong.historia_usuario (nombre,idproyecto) VALUES (?,?)",
+				new Object[] {  hUsuario.getNombre(), hUsuario.getId() });
+	}
+	
+	/*public int addTicket(IdNombre ticket) {
+		//De alguna forma debemos guardar el detalle del ticket que se crea
+		int detalle = jdbcTemplate.update(
+				"insert into bdfusepong.detalle_ticket (comentario,fecha,idestado,idticket) "
+						+ "values(?, ?, ?, ?)",
+				new Object[] { "Estado Inicial", new Date(),1,ticket.getId() });
+		return jdbcTemplate.update(
+				"INSERT INTO bdfusepong.ticket (nombre,idestado,idhistoria_usuario) VALUES (?,?,?); ",
+				new Object[] {   ticket.getNombre(),1,ticket.getId() });
+	}*/
+	
+	public int addTicket(IdNombre ticket) {
+	String insertSql = "INSERT INTO bdfusepong.ticket (nombre,idestado,idhistoria_usuario) VALUES (?,?,?)";
+	    KeyHolder keyHolder = new GeneratedKeyHolder();
+	    jdbcTemplate.update(connection -> {
+	      PreparedStatement ps = connection.prepareStatement(insertSql, new String[] { "ID" });
+	      ps.setString(1, ticket.getNombre());
+	      ps.setInt(2, 1);
+	      ps.setInt(3, ticket.getId());
+	      return ps;
+	    }, keyHolder);
+	    int idTicket = keyHolder.getKey().intValue();
+	    int detalle = jdbcTemplate.update(
+				"insert into bdfusepong.detalle_ticket (comentario,fecha,idestado,idticket) "
+						+ "values(?, ?, ?, ?)",
+				new Object[] { "Estado Inicial", new Date(),1, idTicket});
+	    return detalle;
+	}
+	
 	
 
 }

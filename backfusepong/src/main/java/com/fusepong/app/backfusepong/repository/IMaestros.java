@@ -24,4 +24,10 @@ public interface IMaestros {
 	
 	public int cambioEstado(CambioEstado cambio);
 	
+	public int addHistoriaUsuario(IdNombre hUsuario);
+	
+	public int addTicket(IdNombre ticket);
+	
+	
+	
 }

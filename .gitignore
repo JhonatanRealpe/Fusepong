@@ -19,6 +19,9 @@ target/
 *.iml
 *.ipr
 
+# dependencies Angular
+/node_modules
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

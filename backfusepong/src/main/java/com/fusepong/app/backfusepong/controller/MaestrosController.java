@@ -61,8 +61,20 @@ public class MaestrosController {
 	}
 	
 	@PostMapping("/cambioestado")
-	private int insert(@RequestBody CambioEstado cambioEstado) {
+	private int cambioEstado(@RequestBody CambioEstado cambioEstado) {
 		return maestrosService.cambioEstado(cambioEstado);
+
+	}
+	
+	@PostMapping("/addhitoriausuario")
+	private int addhitoriausuario(@RequestBody IdNombre hUsuario) {
+		return maestrosService.addHistoriaUsuario(hUsuario);
+
+	}
+	
+	@PostMapping("/addticket")
+	private int addticket(@RequestBody IdNombre ticket) {
+		return maestrosService.addTicket(ticket);
 
 	}
 
